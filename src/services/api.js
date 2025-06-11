@@ -1,7 +1,6 @@
 import axios from 'axios';
-import Constants from 'expo-constants';
 
-const API_KEY = Constants.extra.apiKey;
+const API_KEY = '25a8f73a9a2b488a99a19d33d743d2ee';
 const BASE_URL = 'https://newsapi.org/v2/';
 
 export const getTopHeadlines = async (country = 'br') => {

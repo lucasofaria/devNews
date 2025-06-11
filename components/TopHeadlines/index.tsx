@@ -4,7 +4,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function TopHeadlines() {
   return (
-    <TouchableOpacity activeOpacity={0.8} style={styles.container}>
+    <TouchableOpacity activeOpacity={0.9} style={styles.container}>
       <Image 
         source={require("@/assets/images/teste.jpg")}  
         style={styles.image} 
@@ -26,8 +26,10 @@ export default function TopHeadlines() {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 14,
+    flex: 1,
     width: 300,
+    marginBottom: 15,
+    marginRight: 10,
   },
   image:{
     width: "100%", 

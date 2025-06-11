@@ -1,15 +1,16 @@
 import colors from "@/constants/colors";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import React from "react";
 import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
-import TopHeadlines from "../../../../components/TopHeadlines";
 
-export default function Home(){
+const Teste: React.FC = () => {
+
   return(
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Image source={require("@/assets/images/logo.png")} style={styles.logo} />
         
-        <View style={styles.areaSearch}>
+        <View style={styles.ButtonSearch}>
           <Ionicons name="search" size={18} color={colors.red} />
         </View>
       </View>
@@ -17,8 +18,6 @@ export default function Home(){
       <View>
         <Text style={styles.title}>Últimas notícias</Text>
       </View>
-
-      <TopHeadlines/>
     </SafeAreaView>  
   )
 }
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 50
   },
-  areaSearch:{
+  ButtonSearch:{
     backgroundColor: colors.white,
     padding: 10,
     borderRadius: 20,
@@ -56,5 +55,10 @@ const styles = StyleSheet.create({
     color: colors.red,
     marginTop: 20,
     marginBottom: 20
+  },
+  areaTopHeadlines:{
+    width: "100%",
   }
 })
+
+export default Teste;
