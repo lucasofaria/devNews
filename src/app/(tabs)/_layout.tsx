@@ -2,7 +2,7 @@ import colors from "@/constants/colors";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from "expo-router";
 
-export default function Layout(){
+export default function TabLayout(){
   return(
     <Tabs screenOptions={{
       tabBarStyle: {
@@ -31,9 +31,9 @@ export default function Layout(){
           tabBarShowLabel: false,
           tabBarIcon: ({ focused, color, size }) => {
             if (focused){
-              return <Ionicons name="save" size={size} color={colors.red} />
+              return <Ionicons name="bookmark" size={size} color={colors.red} />
             }
-            return <Ionicons name="save-outline" size={size} color={colors.red} />
+            return <Ionicons name="bookmark-outline" size={size} color={colors.red} />
           },
         }}
       />

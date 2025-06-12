@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: "hidden",
     marginHorizontal: 8,
-    backgroundColor: 'trasparent',
+    backgroundColor: 'trasparent'
   },
   image: {
     width: '100%',

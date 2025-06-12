@@ -3,6 +3,9 @@
     "name": "devNews",
     "slug": "devNews",
     "version": "1.0.0",
+    "extra": {
+      "newsApiKey": "25a8f73a9a2b488a99a19d33d743d2ee"
+    },
     "orientation": "portrait",
     "icon": "./assets/images/logo.png",
     "scheme": "devnews",

@@ -1,22 +1,38 @@
-import colors from "@/constants/colors";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { fetchTopHeadlines } from '@/src/services/api';
+import { useRouter } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, Text, TouchableOpacity } from 'react-native';
 
+export default function Saved() {
+  const [news, setNews] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
-export default function Saved(){
-  return(
-    <SafeAreaView style={styles.container}>
-      <View>
-        <Text>Notícias salvas</Text>
-      </View>
-    </SafeAreaView>  
-  )
+  useEffect(() => {
+    fetchTopHeadlines()
+      .then(setNews)
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <ActivityIndicator size="large" style={{ marginTop: 50 }} />;
+
+  return (
+    <FlatList
+      data={news}
+      keyExtractor={(item) => item.url}
+      renderItem={({ item }) => (
+        <TouchableOpacity
+          onPress={() => router.push({ pathname: '/detalhes', params: { title: item.title, content: item.content }})}
+          style={{
+            padding: 16,
+            borderBottomWidth: 1,
+            borderBottomColor: '#ccc',
+          }}
+        >
+          <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
+          <Text numberOfLines={2}>{item.description}</Text>
+        </TouchableOpacity>
+      )}
+    />
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: colors.background
-  }
-})
