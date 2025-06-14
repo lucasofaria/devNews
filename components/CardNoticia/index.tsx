@@ -5,10 +5,19 @@ interface Props {
   title: string;
   publishedAt: string;
   urlToImage: string;
+  author: string;
   onPress: () => void;
 }
 
-export default function CardNoticia({ title, publishedAt, urlToImage, onPress }: Props) {
+export default function CardNoticia({ title, publishedAt, urlToImage, author, onPress }: Props) {
+
+  function formatDate(dateString: string) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('pt-BR');
+  }
+
+  const headerText = author && author != 'null' ? `${author} - ${formatDate(publishedAt)}` : formatDate(publishedAt);
+  
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.card}>
@@ -17,11 +26,11 @@ export default function CardNoticia({ title, publishedAt, urlToImage, onPress }:
         </View>
 
         <View style={styles.newsContent}>
-          <Text style={styles.title} numberOfLines={3} ellipsizeMode="tail">
+          <Text style={styles.title} numberOfLines={4} ellipsizeMode="tail">
             {title}
           </Text>
           <Text style={styles.published} ellipsizeMode="tail">
-            {publishedAt}
+            {headerText}
           </Text>
         </View>  
       </View>
@@ -54,9 +63,9 @@ const styles = StyleSheet.create({
     maxWidth: '100%',
   },
   title: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 6,
+    marginBottom: 5,
   },
   published: {
     fontSize: 14,

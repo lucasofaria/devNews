@@ -62,7 +62,7 @@ const Home: React.FC = () => {
         </View>
       </View>
 
-      <ScrollView showsHorizontalScrollIndicator={false}>
+      <ScrollView style={styles.areaScroll} showsHorizontalScrollIndicator={false}>
         <View>
           <Text style={styles.title}>Últimas notícias</Text>
         </View>
@@ -80,9 +80,10 @@ const Home: React.FC = () => {
             renderItem={({ item }) => (
               <CardNoticia
                 urlToImage={item.urlToImage} 
-                title={item.title} 
+                title={item.title}
+                author={item.author} 
                 publishedAt={item.publishedAt} 
-                onPress={() => router.push({ pathname: '/detalhes', params: { urlToImage: item.urlToImage, title: item.title, content: item.content }})} 
+                onPress={() => router.push({ pathname: '/detalhes', params: { urlToImage: item.urlToImage, title: item.title, content: item.content, author: item.author, url: item.url, publishedAt: item.publishedAt }})} 
               />
             )}
             contentContainerStyle={{ padding: 10}}
@@ -97,6 +98,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+  },
+  areaScroll:{
+    backgroundColor: colors.white,
   },
   header:{
     flexDirection: "row",
@@ -125,29 +129,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginTop: 20,
     marginBottom: 20
-  },
-  areaTopHeadlines:{
-    width: "100%",
-  },
-  newsImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 10,
-    margin: 10,
-  },
-  newsItem:{
-    width: "95%",
-    height: 120,
-    borderRadius: 10,
-    backgroundColor: colors.white,
-    marginBottom: 10,
-    marginLeft: 10,
-    marginRight: 10,
-    flexDirection: "row"
-  },
-  newsContent:{
-    flex: 1,
-    width: 100,
   }
 })
 

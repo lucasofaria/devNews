@@ -5,7 +5,7 @@ const BASE_URL = 'https://newsapi.org/v2/';
 export async function fetchTopHeadlines(country = 'us') {
   try {
     const response = await fetch(
-      `${BASE_URL}/top-headlines?country=${country}&apiKey=${NEWS_API_KEY}`
+      `${BASE_URL}/everything?q=Brasil&language=pt&sortBy=publishedAt&apiKey=${NEWS_API_KEY}`
     );
     const data = await response.json();
 

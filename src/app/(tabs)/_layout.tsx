@@ -8,6 +8,7 @@ export default function TabLayout(){
       tabBarStyle: {
         backgroundColor: colors.white,
         borderTopWidth: 0,
+        paddingTop: 10
       },
       tabBarActiveTintColor: colors.red,
       headerShown: false,
@@ -16,7 +17,7 @@ export default function TabLayout(){
         name="page"
         options={{
           tabBarShowLabel: false,
-          tabBarIcon: ({ focused, color, size }) => {
+          tabBarIcon: ({ focused, size }) => {
             if (focused){
               return <Ionicons name="home" size={size} color={colors.red} />
             }
@@ -29,7 +30,7 @@ export default function TabLayout(){
         name="saved"
         options={{
           tabBarShowLabel: false,
-          tabBarIcon: ({ focused, color, size }) => {
+          tabBarIcon: ({ focused, size }) => {
             if (focused){
               return <Ionicons name="bookmark" size={size} color={colors.red} />
             }
