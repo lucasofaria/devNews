@@ -3,93 +3,167 @@ import TopHeadlinesCarousel from "@/components/TopHeadlinesCarousel";
 import colors from "@/constants/colors";
 import { fetchTopHeadlines } from "@/src/services/api";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Constants from "expo-constants";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-type Headline = {
-  id: string;
-  title: string;
-  imageUrl: string;
-}
+const categories = ['general', 'technology', 'sports', 'business', 'entertainment', 'health', 'science'];
 
 const Home: React.FC = () => {
-  const [topHeadlines, setTopHeadlines] = useState<Headline[]>([]);
-
+  const [topHeadlines, setTopHeadlines] = useState<any[]>([]);
   const [news, setNews] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [categorySelected, setCategorySelected] = useState('general');
+  const [page, setPage] = useState(1);
+  const [loadingMore, setLoadingMore] = useState(false);
+
   const router = useRouter();
 
+  // Atualiza a página para 1 ao trocar a categoria
   useEffect(() => {
+    setPage(1);
+  }, [categorySelected]);
 
-    fetchTopHeadlines().then(setNews).finally(() => setLoading(false));
+  // Busca notícias sempre que page ou categoria mudar
+  useEffect(() => {
+    fetchNoticias(page > 1);
+  }, [page, categorySelected]);
 
-    const fetchHeadlines = async () => {
-    const data: Headline[] = [
-      {
-        id: "1",
-        title: "Notícia urgente sobre tecnologia.",
-        imageUrl: "https://picsum.photos/400/200",
-      },
-      {
-        id: "2",
-        title: "Nova atualização do React Native.",
-        imageUrl: "https://picsum.photos/400/200",
-      },
-      {
-        id: "3",
-        title: "Lançamento de app que vai revolucionar o mundo.",
-        imageUrl: "https://picsum.photos/400/200",
-      },
-    ];
-       setTopHeadlines(data);
-     };
 
-    fetchHeadlines();
+  useEffect(() => {
+    const getTopHeadlines = async () => {
+      try {
+        const data = await fetchTopHeadlines();
+        setTopHeadlines(data.slice(0, 4));
+      } catch (error) {
+        console.error("Erro ao buscar top headlines", error);
+      }
+    };
 
-  }, []);
+    getTopHeadlines();
+  },[])
 
-  if (loading) return <ActivityIndicator size="large" style={{ marginTop: 50 }} />;
 
+  async function fetchNoticias(isLoadMore = false) {
+    if (isLoadMore) {
+      setLoadingMore(true);
+    } else {
+      setLoading(true);
+    }
+
+    try {
+      const response = await fetch(
+      `https://newsapi.org/v2/everything?q=${categorySelected}&language=pt&sortBy=publishedAt&page=${page}&pageSize=10&apiKey=${Constants.expoConfig?.extra?.newsApiKey}`
+    );
+    const data = await response.json();
+
+    if (isLoadMore) {
+      const newArticles = data.articles.filter(
+        (article: any) => !news.some((n) => n.url === article.url)
+      );
+      setNews(prev => [...prev, ...data.articles]);
+    } else {
+      setNews(data.articles || []);
+    }
+    } catch (error) {
+      console.error("Erro ao buscar noticias", error);
+    }
+    
+    if (isLoadMore) setLoadingMore(false);
+    else setLoading(false);
+  };
+
+  const handleLoadMore = () => {
+    if (!loading) {
+      setPage(prev => prev + 1);
+    }
+  };
+
+  const renderHeader = () => (
+    <>
+      <Text style={styles.title}>Últimas notícias</Text>
+      
+      <TouchableOpacity>
+        <TopHeadlinesCarousel headlines={topHeadlines} />
+      </TouchableOpacity>
+
+      <Text style={styles.title}>Categorias</Text>
+        
+      <FlatList
+        data={categories}
+        keyExtractor={(item) => item}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.categories}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() => setCategorySelected(item)}
+            style={[
+              styles.buttonCategory,
+              categorySelected === item && styles.buttonSelected,
+            ]}
+          >
+            <Text
+              style={[
+                styles.textCategory,
+                categorySelected === item && styles.textSelected,
+              ]}
+            >
+              {item.charAt(0).toUpperCase() + item.slice(1)}
+            </Text>
+          </TouchableOpacity>
+        )}
+      />
+    </>
+  )
+  
   return(
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Image source={require("@/assets/images/logo.png")} style={styles.logo} />
-        
-        <View style={styles.ButtonSearch}>
+        <Image
+          source={require("@/assets/images/logo.png")}
+          style={styles.logo}
+        />
+        <View style={styles.buttonSearch}>
           <Ionicons name="search" size={18} color={colors.red} />
         </View>
       </View>
 
-      <ScrollView style={styles.areaScroll} showsHorizontalScrollIndicator={false}>
-        <View>
-          <Text style={styles.title}>Últimas notícias</Text>
-        </View>
-
-        <TouchableOpacity>
-          <TopHeadlinesCarousel headlines={topHeadlines} />
-        </TouchableOpacity>
-
-        <Text style={styles.title}>Categorias</Text>
-
-        <View>
-          <FlatList
-            data={news}
-            keyExtractor={(item) => item.url}
-            renderItem={({ item }) => (
-              <CardNoticia
-                urlToImage={item.urlToImage} 
-                title={item.title}
-                author={item.author} 
-                publishedAt={item.publishedAt} 
-                onPress={() => router.push({ pathname: '/detalhes', params: { urlToImage: item.urlToImage, title: item.title, content: item.content, author: item.author, url: item.url, publishedAt: item.publishedAt }})} 
-              />
-            )}
-            contentContainerStyle={{ padding: 10}}
+      <FlatList
+        data={news}
+        keyExtractor={(item) => item.url}
+        renderItem={({ item }) => (
+          <CardNoticia
+            urlToImage={item.urlToImage} 
+            title={item.title}
+            author={item.author} 
+            publishedAt={item.publishedAt} 
+            onPress={() => 
+              router.push({ 
+                pathname: '/detalhes', 
+                params: { 
+                  urlToImage: item.urlToImage, 
+                  title: item.title, 
+                  content: item.content, 
+                  author: item.author, 
+                  url: item.url, 
+                  publishedAt: item.publishedAt 
+                }
+              })
+            } 
           />
-        </View>
-      </ScrollView>
+        )}
+
+        ListHeaderComponent={renderHeader}
+        ListFooterComponent={
+          loadingMore ? <ActivityIndicator size="small" color={colors.red} style={{ marginVertical: 20 }} /> : null
+        }
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.5}
+        contentContainerStyle={{ paddingBottom: 10 }}
+      />
     </SafeAreaView>  
   )
 }
@@ -98,9 +172,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-  },
-  areaScroll:{
-    backgroundColor: colors.white,
   },
   header:{
     flexDirection: "row",
@@ -113,7 +184,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 50
   },
-  ButtonSearch:{
+  buttonSearch:{
     backgroundColor: colors.white,
     padding: 10,
     borderRadius: 20,
@@ -129,7 +200,29 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginTop: 20,
     marginBottom: 20
-  }
+  },
+  categories: {
+    flexDirection: "row",
+    paddingLeft: 10,
+    marginBottom: 20,
+  },
+  buttonCategory: {
+    backgroundColor: "#eee",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+    marginRight: 8,
+  },
+  buttonSelected: {
+    backgroundColor: colors.red,
+  },
+  textCategory: {
+    color: "#333",
+  },
+  textSelected: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
 })
 
 export default Home;
