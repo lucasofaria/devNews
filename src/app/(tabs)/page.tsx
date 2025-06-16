@@ -2,6 +2,7 @@ import CardNoticia from "@/components/CardNoticia";
 import TopHeadlinesCarousel from "@/components/TopHeadlinesCarousel";
 import colors from "@/constants/colors";
 import { fetchTopHeadlines } from "@/src/services/api";
+import { Noticia } from "@/src/types/Noticia";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Constants from "expo-constants";
 import { useRouter } from "expo-router";
@@ -9,11 +10,11 @@ import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const categories = ['general', 'technology', 'sports', 'business', 'entertainment', 'health', 'science'];
+const categories = ['Geral', 'Tecnologia', 'Esporte', 'Negócios', 'Política', 'Entretenimento', 'Saúde', 'Ciência'];
 
 const Home: React.FC = () => {
-  const [topHeadlines, setTopHeadlines] = useState<any[]>([]);
-  const [news, setNews] = useState<any[]>([]);
+  const [topHeadlines, setTopHeadlines] = useState<Noticia[]>([]);
+  const [news, setNews] = useState<Noticia[]>([]);
   const [loading, setLoading] = useState(true);
   const [categorySelected, setCategorySelected] = useState('general');
   const [page, setPage] = useState(1);
@@ -126,9 +127,9 @@ const Home: React.FC = () => {
           source={require("@/assets/images/logo.png")}
           style={styles.logo}
         />
-        <View style={styles.buttonSearch}>
+        <TouchableOpacity style={styles.buttonSearch} onPress={() => router.push('/search')}>
           <Ionicons name="search" size={18} color={colors.red} />
-        </View>
+        </TouchableOpacity>
       </View>
 
       <FlatList

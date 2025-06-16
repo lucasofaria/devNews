@@ -55,7 +55,14 @@ const TopHeadlinesCarousel: React.FC<Props> = ({ headlines }) => {
                 })
             }
           >
-            <Image source={{ uri: item.urlToImage || `https://placehold.co/400x200?text=Sem+conteúdo` }} style={styles.image} />
+            <Image 
+              source={{ 
+                uri: item.urlToImage?.startsWith('http')
+                ? item.urlToImage
+                : `https://placehold.co/400x200?text=Sem+conteúdo`, 
+              }}
+              style={styles.image} 
+            />
             <View style={styles.overlay}>
               <Text style={styles.title}>{item.title}</Text>
             </View>
