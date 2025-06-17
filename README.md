@@ -6,10 +6,10 @@ O **devNews** é um aplicativo mobile desenvolvido com **React Native** e **Expo
 Veja abaixo algumas telas do aplicativo devNews em funcionamento:
 
 <p align="center">
-  <img src="assets/screenshots/home.png" alt="Tela Home" width="200"/>
-  <img src="assets/screenshots/search.png" alt="Tela de Busca" width="200"/>
-  <img src="assets/screenshots/details.png" alt="Tela de Detalhes" width="200"/>
-  <img src="assets/screenshots/favorites.png" alt="Tela de Favoritos" width="200"/>
+  <img src="assets/home.jpg" alt="Tela Home" width="200"/>
+  <img src="assets/search.jpg" alt="Tela de Busca" width="200"/>
+  <img src="assetsdetails.jpg" alt="Tela de Detalhes" width="200"/>
+  <img src="assetsfavorites.jpg" alt="Tela de Favoritos" width="200"/>
 </p>
 
 ## 📱 Funcionalidades
