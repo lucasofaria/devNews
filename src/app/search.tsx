@@ -5,7 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import Constants from 'expo-constants';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { ActivityIndicator, Alert, FlatList, Image, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Alert, FlatList, Image, StatusBar, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Search: React.FC = () => {
@@ -33,6 +33,7 @@ const Search: React.FC = () => {
 
   return(
     <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor={colors.background} barStyle="dark-content" />
       <View style={styles.containerHeader}>
         <TouchableOpacity style={styles.areaButton} onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={18} color={colors.red} />

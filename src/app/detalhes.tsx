@@ -3,7 +3,7 @@ import { addFavorite, isFavorite, removeFavorite } from '@/src/utils/storage';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Image, Linking, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Linking, ScrollView, Share, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Detalhes() {
@@ -49,6 +49,7 @@ export default function Detalhes() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor={colors.background} barStyle="dark-content" />
       <View style={styles.containerHeader}>
         <View>
           <TouchableOpacity style={styles.areaButton} onPress={() => router.back()}>
@@ -63,10 +64,6 @@ export default function Detalhes() {
 
           <TouchableOpacity style={styles.areaButton} onPress={handleFavorite}>
             <Ionicons name={favorited ? "bookmark" : "bookmark-outline"} size={18} color={colors.red}/>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.areaButton}>
-            <Ionicons name="search" size={18} color={colors.red}/>
           </TouchableOpacity>
         </View>
       </View>

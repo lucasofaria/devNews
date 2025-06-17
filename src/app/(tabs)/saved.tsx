@@ -5,7 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect, useRouter } from 'expo-router';
 import React, { useCallback, useState } from 'react';
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Saved: React.FC = () => {
@@ -28,6 +28,7 @@ const Saved: React.FC = () => {
 
   return(
     <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor={colors.background} barStyle="dark-content" />
       <View style={styles.containerHeader}>
         <TouchableOpacity style={styles.areaButton} onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={18} color={colors.red} />

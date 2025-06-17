@@ -7,7 +7,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Constants from "expo-constants";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const categories = ['Geral', 'Tecnologia', 'Esporte', 'Negócios', 'Política', 'Entretenimento', 'Saúde', 'Ciência'];
@@ -121,7 +121,8 @@ const Home: React.FC = () => {
   )
   
   return(
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
+      <StatusBar backgroundColor={colors.background} barStyle="dark-content" />
       <View style={styles.header}>
         <Image
           source={require("@/assets/images/logo.png")}
@@ -171,8 +172,7 @@ const Home: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
-    paddingVertical: 10,
+    backgroundColor: colors.background
   },
   header:{
     flexDirection: "row",
