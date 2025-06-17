@@ -8,8 +8,8 @@ Veja abaixo algumas telas do aplicativo devNews em funcionamento:
 <p align="center">
   <img src="assets/home.jpg" alt="Tela Home" width="200"/>
   <img src="assets/search.jpg" alt="Tela de Busca" width="200"/>
-  <img src="assetsdetails.jpg" alt="Tela de Detalhes" width="200"/>
-  <img src="assetsfavorites.jpg" alt="Tela de Favoritos" width="200"/>
+  <img src="assets/details.jpg" alt="Tela de Detalhes" width="200"/>
+  <img src="assets/favorites.jpg" alt="Tela de Favoritos" width="200"/>
 </p>
 
 ## 📱 Funcionalidades
