@@ -1,50 +1,76 @@
-# Welcome to your Expo app 👋
+# 📰 DevNews 
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+O **devNews** é um aplicativo mobile desenvolvido com **React Native** e **Expo** que permite ao usuário acompanhar as últimas notícias organizadas por categorias, realizar buscas por palavra-chave e salvar notícias favoritas para leitura posterior e compartilhar com quem quiser.
 
-## Get started
+## 📲 Demonstração
+Veja abaixo algumas telas do aplicativo devNews em funcionamento:
 
-1. Install dependencies
+<p align="center">
+  <img src="assets/screenshots/home.png" alt="Tela Home" width="200"/>
+  <img src="assets/screenshots/search.png" alt="Tela de Busca" width="200"/>
+  <img src="assets/screenshots/details.png" alt="Tela de Detalhes" width="200"/>
+  <img src="assets/screenshots/favorites.png" alt="Tela de Favoritos" width="200"/>
+</p>
+
+## 📱 Funcionalidades
+
+- Listagem de notícias por categoria
+- Busca de notícias por palavra-chave
+- Visualização de notícia em tela detalhada
+- Carousel com destaques (Top Headlines)
+- Favoritar e desfavoritar notícias
+- Visualização de notícias favoritas
+- Scroll infinito para carregar mais notícias
+- Compartilhamento de notícias
+
+## 🚀 Tecnologias
+
+- **React Native + Expo** para facilitar o desenvolvimento e testagem em múltiplos dispositivos.
+- **React Navigation** com `expo-router` para navegação simplificada entre telas.
+- **AsyncStorage** para armazenamento local das notícias favoritas.
+- **FlatList com scroll infinito** permite carregamento dinâmico das notícias conforme o usuário rola a tela.
+- **NewsAPI** integração com a API para obter notícias atualizadas.
+- **SafeAreaView com edges** para garantir o uso correto do espaço em dispositivos com notch.
+
+## 🛠️ Como executar o projeto
+
+### Pré-requisitos
+
+- [Node.js](https://nodejs.org/)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
+- Um editor como [VS Code](https://code.visualstudio.com/)
+
+1. Clone o repositório
+
+   ```bash
+   git clone https://github.com/lucasofaria/devNews.git
+   cd devNews
+   ```
+
+2. Instale as dependências
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Adicione suas vaiáveis de ambiente
+No arquivo app.config.js, você precisa adicionar sua chave da NewsAPI em extra.newsApiKey. Exemplo:
+   ````bash
+   extra: {
+      newsApiKey: "SUA_API_KEY_AQUI"
+   }
+   ````
+Você pode obter uma chave gratuita em https://newsapi.org.
+
+4. Inicie o app
 
    ```bash
    npx expo start
    ```
+Escaneie o QR code com o aplicativo do Expo Go ou use um emulador Android/iOS.
 
-In the output, you'll find options to open the app in a
+## 📌 Observações
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- O app está otimizado para Android, mas também funciona em iOS.
+- A imagem de destaque pode não carregar caso a notícia não contenha urlToImage.
+- A NewsAPI possui limites de requisição na versão gratuita.
