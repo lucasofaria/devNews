@@ -54,7 +54,7 @@ Veja abaixo algumas telas do aplicativo devNews em funcionamento:
    ```
 
 3. Adicione suas vaiáveis de ambiente
-No arquivo app.config.js, você precisa adicionar sua chave da NewsAPI em extra.newsApiKey. Exemplo:
+No arquivo `app.config.js`, você precisa adicionar sua chave da NewsAPI em `extra.newsApiKey`. Exemplo:
    ````bash
    extra: {
       newsApiKey: "SUA_API_KEY_AQUI"
@@ -72,5 +72,5 @@ Escaneie o QR code com o aplicativo do Expo Go ou use um emulador Android/iOS.
 ## 📌 Observações
 
 - O app está otimizado para Android, mas também funciona em iOS.
-- A imagem de destaque pode não carregar caso a notícia não contenha urlToImage.
+- A imagem de destaque pode não carregar caso a notícia não contenha `urlToImage`.
 - A NewsAPI possui limites de requisição na versão gratuita.
