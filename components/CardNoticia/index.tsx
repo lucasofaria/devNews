@@ -19,21 +19,19 @@ export default function CardNoticia({ title, publishedAt, urlToImage, author, on
   const headerText = author && author != 'null' ? `${author} - ${formatDate(publishedAt)}` : formatDate(publishedAt);
   
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={styles.card}>
-        <View>
-          <Image source={{ uri: urlToImage }} style={styles.newsImage}/>
-        </View>
-
-        <View style={styles.newsContent}>
-          <Text style={styles.title} numberOfLines={4} ellipsizeMode="tail">
-            {title}
-          </Text>
-          <Text style={styles.published} ellipsizeMode="tail">
-            {headerText}
-          </Text>
-        </View>  
+    <TouchableOpacity onPress={onPress} style={styles.card}>
+      <View>
+        <Image source={{ uri: urlToImage }} style={styles.newsImage}/>
       </View>
+
+      <View style={styles.newsContent}>
+        <Text style={styles.title} numberOfLines={4} ellipsizeMode="tail">
+          {title}
+        </Text>
+        <Text style={styles.published} ellipsizeMode="tail">
+          {headerText}
+        </Text>
+      </View>  
     </TouchableOpacity>
   );
 }
@@ -50,6 +48,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     shadowOffset: { width: 0, height: 2 },
     flexDirection: 'row',
+    marginHorizontal: 10,
   },
   newsImage: {
     width: 100,

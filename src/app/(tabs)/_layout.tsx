@@ -7,16 +7,16 @@ export default function TabLayout(){
     <Tabs screenOptions={{
       tabBarStyle: {
         backgroundColor: colors.white,
-        borderTopWidth: 0,
-        paddingTop: 10
+        paddingTop: 10,
       },
       tabBarActiveTintColor: colors.red,
       headerShown: false,
+      tabBarHideOnKeyboard: true,
+      tabBarShowLabel: false,
     }}>
       <Tabs.Screen
         name="page"
         options={{
-          tabBarShowLabel: false,
           tabBarIcon: ({ focused, size }) => {
             if (focused){
               return <Ionicons name="home" size={size} color={colors.red} />
@@ -27,9 +27,8 @@ export default function TabLayout(){
       />
 
       <Tabs.Screen
-        name="saved"
+        name="saved"        
         options={{
-          tabBarShowLabel: false,
           tabBarIcon: ({ focused, size }) => {
             if (focused){
               return <Ionicons name="bookmark" size={size} color={colors.red} />

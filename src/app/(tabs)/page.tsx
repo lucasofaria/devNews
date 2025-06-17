@@ -13,7 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const categories = ['Geral', 'Tecnologia', 'Esporte', 'Negócios', 'Política', 'Entretenimento', 'Saúde', 'Ciência'];
 
 const Home: React.FC = () => {
-  const [topHeadlines, setTopHeadlines] = useState<Noticia[]>([]);
+  const [topHeadlines, setTopHeadlines] = useState<any[]>([]);
   const [news, setNews] = useState<Noticia[]>([]);
   const [loading, setLoading] = useState(true);
   const [categorySelected, setCategorySelected] = useState('general');
@@ -163,7 +163,6 @@ const Home: React.FC = () => {
         }
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.5}
-        contentContainerStyle={{ paddingBottom: 10 }}
       />
     </SafeAreaView>  
   )
@@ -173,6 +172,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+    paddingVertical: 10,
   },
   header:{
     flexDirection: "row",

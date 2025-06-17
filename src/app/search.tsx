@@ -5,7 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import Constants from 'expo-constants';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { ActivityIndicator, FlatList, Image, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Alert, FlatList, Image, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Search: React.FC = () => {
@@ -16,17 +16,18 @@ const Search: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   async function handleSearch() {
-    if (query.length < 3 ) return;
-
+    if (query.length < 3 ) {
+      return  Alert.alert('Erro', 'Digite pelo menos 3 caracteres para buscar.');
+    }
     setLoading(true);
     try {
       const response = await fetch(`https://newsapi.org/v2/everything?q=${query}&language=pt&sortBy=publishedAt&apiKey=${Constants.expoConfig?.extra?.newsApiKey}`);
       const data = await response.json();
       setResults(data.articles || []);
     } catch (error) {
+      Alert.alert('Erro', 'Não foi possível buscar as notícias. Tente novamente.');
       console.error('Erro ao buscar notícias:', error);
-    } 
-      
+    }
     setLoading(false);
   }
 
@@ -45,7 +46,7 @@ const Search: React.FC = () => {
 
       <TextInput
         placeholder='Ex.: Bitcoin'
-        placeholderTextColor={"#000"}
+        placeholderTextColor={"#ddd"}
         style={styles.input}
         value={query}
         onChangeText={setQuery}
@@ -70,7 +71,7 @@ const Search: React.FC = () => {
                   pathname: "/detalhes",
                   params: {
                     title: item.title,
-                    imageUrl: item.urlToImage || "",
+                    urlToImage: item.urlToImage || "",
                     author: item.author || "",
                     publishedAt: item.publishedAt,
                     url: item.url,
@@ -80,9 +81,6 @@ const Search: React.FC = () => {
               }
             />
           )}
-
-          contentContainerStyle={{ padding: 10 }}
-
         />
       )}
     </SafeAreaView>

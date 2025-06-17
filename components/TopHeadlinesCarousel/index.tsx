@@ -1,3 +1,4 @@
+import { Noticia } from "@/src/types/Noticia";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -6,17 +7,8 @@ import Carousel from "react-native-reanimated-carousel";
 
 const { width } = Dimensions.get("window");
 
-type Headline = {
-  title?: string;
-  urlToImage?: string;
-  author?: string;
-  publishedAt?: string;
-  url?: string;
-  content?: string;
-};
-
 type Props = {
-  headlines: Headline[];
+  headlines: Noticia[];
 };
 
 const TopHeadlinesCarousel: React.FC<Props> = ({ headlines }) => {
@@ -46,7 +38,7 @@ const TopHeadlinesCarousel: React.FC<Props> = ({ headlines }) => {
                   pathname: '/detalhes',
                   params: {
                     title: item.title,
-                    imageUrl: item.urlToImage || '',
+                    urlToImage: item.urlToImage || '',
                     author: item.author || '',
                     publishedAt: item.publishedAt,
                     url: item.url,
@@ -57,7 +49,7 @@ const TopHeadlinesCarousel: React.FC<Props> = ({ headlines }) => {
           >
             <Image 
               source={{ 
-                uri: item.urlToImage?.startsWith('http')
+                uri: item.urlToImage.startsWith('http')
                 ? item.urlToImage
                 : `https://placehold.co/400x200?text=Sem+conteúdo`, 
               }}
@@ -90,6 +82,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: "hidden",
     backgroundColor: 'trasparent',
+    marginHorizontal: 10,
   },
   image: {
     width: '100%',

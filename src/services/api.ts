@@ -18,7 +18,7 @@ export async function fetchEverythingByCategory(category: string): Promise<any[]
 export async function fetchTopHeadlines(): Promise<any[]> {
   try {
     const response = await fetch(
-      `${BASE_URL}/top-headlines?q=Brasil&pageSize=4&apiKey=${NEWS_API_KEY}`
+      `${BASE_URL}/top-headlines?category=business&pageSize=4&sortBy=publishedAt&apiKey=${NEWS_API_KEY}`
     );
     const data = await response.json();
     return data.articles || [];
