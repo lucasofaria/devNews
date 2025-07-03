@@ -49,7 +49,7 @@ const TopHeadlinesCarousel: React.FC<Props> = ({ headlines }) => {
           >
             <Image 
               source={{ 
-                uri: item.urlToImage.startsWith('http')
+                uri: typeof item.urlToImage === 'string' && item.urlToImage.startsWith('http')
                 ? item.urlToImage
                 : `https://placehold.co/400x200?text=Sem+conteúdo`, 
               }}

@@ -12,7 +12,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const categories = ['Geral', 'Tecnologia', 'Esporte', 'Negócios', 'Política', 'Entretenimento', 'Saúde', 'Ciência'];
 
-const Home: React.FC = () => {
+const Page: React.FC = () => {
   const [topHeadlines, setTopHeadlines] = useState<any[]>([]);
   const [news, setNews] = useState<Noticia[]>([]);
   const [loading, setLoading] = useState(true);
@@ -226,4 +226,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Home;
+export default Page;
